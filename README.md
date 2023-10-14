@@ -14,4 +14,4 @@ Discord bot token is stored in a `config.json` in `src`
 
 ## License
 
-[MIT]()
+[MIT](https://github.com/Ollie2304/media-embed-bot/blob/main/LICENSE)
