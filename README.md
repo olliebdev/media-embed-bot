@@ -1,6 +1,6 @@
 # Media Embed Bot
 
-Automatically embeds [Twitter / X](https://github.com/FixTweet/FixTweet) & [TikTok](https://github.com/dylanpdx/vxtiktok) media in Discord.
+Automatically embeds [Twitter / X](https://github.com/FixTweet/FixTweet), Reddit & [TikTok](https://github.com/dylanpdx/vxtiktok) media in Discord.
 
 ## Installation
 
