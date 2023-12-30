@@ -1,22 +1,47 @@
 module.exports = (client) => {
-  client.on("messageCreate", async (message) => {
-    if (message.author.bot) return;
+	// Listens for a message to be sent
+	client.on("messageCreate", async (message) => {
+		// Ignore messages sent from bots
+		if (message.author.bot) return;
 
-    const twitterRegex = /(twitter\.com\/\S+\/status\/\d+)/g;
-    const content = message.content;
+		// Regex looking for Twitter URLs
+		// looks for the pattern https://twitter.com/username/status/1234567890 + optional /photo/<number>
+		const twitterRegex =
+			/(https:\/\/)twitter\.com\/(\S+\/status\/(\d+)(\/photo\/\d+)?)/g;
+		// Gets the content of the sent message
+		const content = message.content;
 
-    if (
-      twitterRegex.test(content) &&
-      !/https:\/\/\S+twitter\.com\/\S+\/status\/\d+/.test(content)
-    ) {
-      let editedContent = content.replace(twitterRegex, "fx$1");
-      if (!/\/photo\/\d+/.test(editedContent)) {
-        editedContent += "/en";
-      }
-      message.delete().catch(console.error);
-      message.channel.send(
-        `${message.author} I've embedded your Twitter media for you!\n ${editedContent}`
-      );
-    }
-  });
+		// Checks if the message contains a Twitter URL by testing it against twitterRegex
+		if (twitterRegex.test(content)) {
+			// Replace the Twitter URL with the FX version
+			const editedContent = content.replace(
+				twitterRegex,
+				(_, protocol, path, __, photo) => {
+					// "_" whole string - ignored
+					// "protocol" - https://
+					// "path" - username/status/1234567890
+					// "__" - 1234567890 - ignored
+					// "photo" - /photo/1
+					// Check if the URL contains a photo, if it does don't add /en to the end
+					if (photo) {
+						return `${protocol}fxtwitter.com/${path}`;
+					}
+					// If the URL doesn't contain a photo add /en to the end.
+					return `${protocol}fxtwitter.com/${path}/en`;
+				},
+			);
+
+			try {
+				// Delete the original message
+				await message.delete();
+				// Send the modified message to the channel
+				await message.channel.send(
+					`${message.author} I've embedded your Twitter media for you!\n${editedContent}`,
+				);
+				// If there's an error it's logged to the console
+			} catch (error) {
+				console.error(`Error with message: ${message.content}`, error);
+			}
+		}
+	});
 };
