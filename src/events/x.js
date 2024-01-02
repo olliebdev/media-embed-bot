@@ -31,12 +31,20 @@ module.exports = (client) => {
 			);
 
 			try {
+				const guild = message.guild;
+				// Create temp webhook with message.author's info
+				const webhook = await guild.channels.cache
+					.get(message.channel.id)
+					.createWebhook({
+						name: message.author.username,
+						avatar: message.author.displayAvatarURL({ dynamic: true }),
+					});
+				// Send the modified message to the channel
+				await webhook.send(editedContent);
+				// Delete temp webhook
+				await webhook.delete();
 				// Delete the original message
 				await message.delete();
-				// Send the modified message to the channel
-				await message.channel.send(
-					`${message.author} I've embedded your X media for you!\n${editedContent}`,
-				);
 				// If there's an error it's logged to the console
 			} catch (error) {
 				console.error(`Error with message: ${message.content}`, error);
