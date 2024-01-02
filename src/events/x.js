@@ -1,3 +1,5 @@
+const { MembershipScreeningFieldType } = require("discord.js");
+
 module.exports = (client) => {
 	// Listens for a message to be sent
 	client.on("messageCreate", async (message) => {
@@ -31,12 +33,11 @@ module.exports = (client) => {
 			);
 
 			try {
-				const guild = message.guild;
 				// Create temp webhook with message.author's info
-				const webhook = await guild.channels.cache
+				const webhook = await message.guild.channels.cache
 					.get(message.channel.id)
 					.createWebhook({
-						name: message.author.username,
+						name: message.member.displayName || message.author.username,
 						avatar: message.author.displayAvatarURL({ dynamic: true }),
 					});
 				// Send the modified message to the channel
