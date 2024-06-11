@@ -14,10 +14,10 @@ module.exports = (client) => {
 		// also checks the user has not already embedded it themselves
 		if (
 			tiktokRegex.test(content) &&
-			!content.includes("https://vm.vxtiktok.com")
+			!content.includes("https://vm.vxtiktok.com" ||"https://vxtiktok.com" || "https://tnktok.com" || "https://vm.tnktok.com")
 		) {
 			// Adds "vx" infront of tiktok
-			const editedContent = content.replace(tiktokRegex, "vx$1");
+			const editedContent = content.replace("tiktok.com", "tnktok.com");
 
 			try {
 				// Create temp webhook with message.author's info
