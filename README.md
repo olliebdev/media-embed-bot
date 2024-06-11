@@ -1,6 +1,6 @@
 # Media Embed Bot
 
-Automatically embeds [Twitter / X](https://github.com/FixTweet/FixTweet), Reddit & [TikTok](https://github.com/dylanpdx/vxtiktok) media in Discord.
+Automatically embeds Twitter / X, Reddit & TikTok media in Discord.
 
 ## Installation
 
@@ -10,7 +10,13 @@ Automatically embeds [Twitter / X](https://github.com/FixTweet/FixTweet), Reddit
 npm install
 ```
 
-Discord bot token is stored in a `config.json` in `src`
+Discord bot token is stored in a `config.json` in `src` with the format:
+```json
+{
+  "token": "TOKEN",
+  "clientId": "CLIENTID"
+}
+```
 
 ## License
 
