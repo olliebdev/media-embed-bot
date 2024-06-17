@@ -14,7 +14,7 @@ module.exports = {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
 		// Sets the bot's presence
 		client.user.setPresence({
-			activities: [{ name: "twitter links", type: ActivityType.Watching }],
+			activities: [{ name: "media links", type: ActivityType.Watching }],
 			status: "dnd",
 		});
 

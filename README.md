@@ -10,12 +10,10 @@ Automatically embeds Twitter / X, Reddit & TikTok media in Discord.
 npm install
 ```
 
-Discord bot token is stored in a `config.json` in `src` with the format:
-```json
-{
-  "token": "TOKEN",
-  "clientId": "CLIENTID"
-}
+Discord bot token is stored in a `.env` in `./` with the format:
+```dotenv
+TOKEN="token"
+CLIENT_ID="client id"
 ```
 
 ## License
