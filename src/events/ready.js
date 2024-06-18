@@ -5,6 +5,7 @@ const twitter = require("./twitter.js");
 const x = require("./x.js");
 const tiktok = require("./tiktok.js");
 const reddit = require("./reddit.js");
+const instagram = require("./instagram.js");
 
 module.exports = {
 	name: Events.ClientReady,
@@ -23,5 +24,6 @@ module.exports = {
 		x(client);
 		tiktok(client);
 		reddit(client);
+		instagram(client);
 	},
 };
