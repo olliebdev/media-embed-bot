@@ -27,9 +27,10 @@ module.exports = (client) => {
 					if (photo) {
 						return `${protocol}fixupx.com/${path}`;
 					}
+					// FIXME is returning error in discord
 					// If the URL doesn't contain a photo add /en to the end.
-					// FIXME This is giving an error in discord
 					// return `${protocol}fixupx.com/${path}/en`;
+					return `${protocol}fixupx.com/${path}`;
 				},
 			);
 
