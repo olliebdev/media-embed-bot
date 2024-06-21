@@ -1,6 +1,12 @@
 # Media Embed Bot
 
-Automatically embeds Twitter / X, Reddit & TikTok media in Discord.
+Automatically embeds:
+- Twitter / X
+- Reddit
+- Instagram
+into discord chat
+
+>requires webhook perms as it creates a webhook to "fake" looking like the user posted it.
 
 ## Installation
 
