@@ -1,10 +1,9 @@
 # Media Embed Bot
 
-Automatically embeds:
+Automatically embeds into Discord chat:
 - Twitter / X
 - Reddit
 - Instagram
-into discord chat
 
 >requires webhook perms as it creates a webhook to "fake" looking like the user posted it.
 
