@@ -5,7 +5,7 @@ module.exports = (client) => {
 		if (message.author.bot) return;
 
 		// Regex looking for Reddit URLs
-		const redditRegex = /(reddit\.com\/\S+\/+)/g;
+		const redditRegex = /(https?:\/\/(?:www\.)?reddit\.com\/r\/[a-zA-Z0-9_]+\/comments\/[a-zA-Z0-9_]+\/[^\/\s]*)/g;
 		// Gets the content of the sent message
 		const content = message.content;
 
@@ -16,7 +16,9 @@ module.exports = (client) => {
 			!content.includes("https://vxreddit.com")
 		) {
 			// Adds "vx" infront of reddit
-			const editedContent = content.replace(redditRegex, "vx$1");
+			const editedContent = content.replace(redditRegex, (match) => {
+                return match.replace("reddit.com", "vxreddit.com");
+            });
 
 			try {
 				// Create temp webhook with message.author's info
