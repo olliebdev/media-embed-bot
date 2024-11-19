@@ -3,7 +3,6 @@ const { Events, ActivityType } = require("discord.js");
 // Imports external code modules
 const twitter = require("./twitter.js");
 const x = require("./x.js");
-const tiktok = require("./tiktok.js");
 const reddit = require("./reddit.js");
 const instagram = require("./instagram.js");
 
@@ -22,7 +21,6 @@ module.exports = {
 		// Execute functions from external modules
 		twitter(client);
 		x(client);
-		tiktok(client);
 		reddit(client);
 		instagram(client);
 	},
