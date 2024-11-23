@@ -8,9 +8,10 @@ module.exports = (client) => {
        
          if (
               instagramRegex.test(content) &&
-              !content.includes("https://ddinstagram.com")
+              !content.includes("https://ddinstagram.com") &&
+              !content.includes("https://kkinstagram.com")
             ) {
-              const editedContent = content.replace(instagramRegex, "dd$1");
+              const editedContent = content.replace(instagramRegex, "kk$1");
               try {
                 const webhook = await message.guild.channels.cache
                   .get(message.channel.id)
