@@ -8,7 +8,7 @@ module.exports = (client) => {
 
 		// Regex looking for X urls
 		// looks for the pattern https://x.com/username/status/1234567890 + optional /photo/<number>
-		const xRegex = /(https:\/\/)x\.com\/(\S+\/status\/(\d+)(\/photo\/\d+)?)/g;
+		const xRegex = /(https:\/\/x\.com\/\S+\/status\/\d+)(\/photo\/\d+)?/g;
 		// Gets the content of the sent message
 		const content = message.content;
 
@@ -17,21 +17,12 @@ module.exports = (client) => {
 			// Replace the X URL with the fixupx version
 			const editedContent = content.replace(
 				xRegex,
-				(_, protocol, path, __, photo) => {
-					// "_" whole string - ignored
-					// "protocol" - https://
-					// "path" - username/status/1234567890
-					// "__" - 1234567890 - ignored
-					// "photo" - /photo/1
-					// Check if the URL contains a photo, if it does don't add /en to the end
+				(_, baseUrl, photo) => {
 					if (photo) {
-						return `${protocol}fixupx.com/${path}`;
+						return `${baseUrl.replace("https://x.com", "https://fixupx.com")}${photo}`;
 					}
-					// FIXME is returning error in discord
-					// If the URL doesn't contain a photo add /en to the end.
-					// return `${protocol}fixupx.com/${path}/en`;
-					return `${protocol}fixupx.com/${path}`;
-				},
+					return baseUrl.replace("https://x.com", "https://fixupx.com");
+				}
 			);
 
 			try {

@@ -3,7 +3,7 @@ module.exports = (client) => {
     client.on("messageCreate", async (message) => {
         // Ignore messages sent from bots
        if (message.author.bot) return;
-       const instagramRegex = /(instagram\.com\/\S+\/+)/g;
+       const instagramRegex = /https:\/\/(?:www\.)?instagram\.com\/(\S+\/?)/g;
        const content = message.content;
        
          if (
@@ -11,7 +11,7 @@ module.exports = (client) => {
               !content.includes("https://ddinstagram.com") &&
               !content.includes("https://kkinstagram.com")
             ) {
-              const editedContent = content.replace(instagramRegex, "kk$1");
+              const editedContent = content.replace(instagramRegex, "https://kkinstagram.com/$1");
               try {
                 const webhook = await message.guild.channels.cache
                   .get(message.channel.id)
