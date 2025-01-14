@@ -1,31 +1,30 @@
 module.exports = (client) => {
-    // Listens for a message to be sent
     client.on("messageCreate", async (message) => {
-        // Ignore messages sent from bots
-       if (message.author.bot) return;
-       const instagramRegex = /https:\/\/(?:www\.)?instagram\.com\/(\S+\/?)/g;
-       const content = message.content;
-       
-         if (
-              instagramRegex.test(content) &&
-              !content.includes("https://ddinstagram.com") &&
-              !content.includes("https://kkinstagram.com")
-            ) {
-              const editedContent = content.replace(instagramRegex, "https://kkinstagram.com/$1");
-              try {
-                const webhook = await message.guild.channels.cache
-                  .get(message.channel.id)
-                  .createWebhook({
-                    name: message.member.displayName || message.author.username,
-                    avatar: message.author.displayAvatarURL({ dynamic: true }),
-                  });
-                await webhook.send(editedContent);
-                await webhook.delete();
-                await message.delete();
-              } catch (error) {
-                console.error(`Error with message: ${message.content}`, error);
-              }
-            }
-    })
-};
+        if (message.author.bot || !message.guild) return;
 
+        const instagramRegex = /https:\/\/(?:www\.)?instagram\.com\/([^\/\s]+(?:\/[^\/\s]*)?)/g;
+
+        if (!instagramRegex.test(message.content) ||
+            message.content.includes("ddinstagram.com") ||
+            message.content.includes("kkinstagram.com")) return;
+
+        instagramRegex.lastIndex = 0;
+        const editedContent = message.content.replace(instagramRegex, (_, path) =>
+            `https://www.kkinstagram.com/${path}`
+        );
+
+        try {
+            const webhook = await message.channel.createWebhook({
+                name: message.member?.displayName || message.author.username,
+                avatar: message.author.displayAvatarURL(),
+            });
+
+            await webhook.send(editedContent);
+            await message.delete();
+            await webhook.delete();
+        } catch (error) {
+            console.error('Error:', error);
+            message.reply('Sorry, something went wrong while processing the Instagram URL.').catch(() => {});
+        }
+    });
+};

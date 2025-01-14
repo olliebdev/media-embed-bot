@@ -6,7 +6,7 @@ module.exports = {
 		.setDescription("Shows information about the bot."),
 	async execute(interaction) {
 		await interaction.reply(
-			"https://github.com/Ollie2304/media-embed-bot",
+			"https://github.com/olliebdev/media-embed-bot",
 		);
 	},
 };

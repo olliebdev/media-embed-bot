@@ -1,27 +1,36 @@
-// Imports events + activity type from discord.js library
 const { Events, ActivityType } = require("discord.js");
-// Imports external code modules
-const twitter = require("./twitter.js");
-const x = require("./x.js");
-const reddit = require("./reddit.js");
-const instagram = require("./instagram.js");
+
+const handlers = {
+    x: require("./x.js"),
+    reddit: require("./reddit.js"),
+    instagram: require("./instagram.js")
+};
 
 module.exports = {
-	name: Events.ClientReady,
-	once: true,
-	execute(client) {
-		// Logs in the console that the bot has started
-		console.log(`Ready! Logged in as ${client.user.tag}`);
-		// Sets the bot's presence
-		client.user.setPresence({
-			activities: [{ name: "media links", type: ActivityType.Watching }],
-			status: "dnd",
-		});
+    name: Events.ClientReady,
+    once: true,
+    async execute(client) {
+        try {
+            await client.user.setPresence({
+                activities: [{
+                    name: "media links",
+                    type: ActivityType.Watching
+                }],
+                status: "dnd"
+            });
 
-		// Execute functions from external modules
-		twitter(client);
-		x(client);
-		reddit(client);
-		instagram(client);
-	},
+            Object.entries(handlers).forEach(([name, handler]) => {
+                try {
+                    handler(client);
+                    console.log(`✓ ${name} handler initialized`);
+                } catch (error) {
+                    console.error(`✗ Failed to initialize ${name} handler:`, error);
+                }
+            });
+
+            console.log(`Ready! Logged in as ${client.user.tag}`);
+        } catch (error) {
+            console.error('Failed during bot initialization:', error);
+        }
+    }
 };
