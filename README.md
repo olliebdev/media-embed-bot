@@ -1,21 +1,30 @@
 # Media Embed Bot
 
+<!--toc:start-->
+- [Media Embed Bot](#media-embed-bot)
+  - [Installation](#installation)
+  - [License](#license)
+<!--toc:end-->
+
 Automatically embeds into Discord chat:
-- Twitter / X
+
+- X
 - Reddit
 - Instagram
 
->requires webhook perms as it creates a webhook to "fake" looking like the user posted it.
+>requires webhook permissions
+>as it creates a webhook to "fake" looking like the user posted it.
 
 ## Installation
 
 `npm` package manager
 
-```
+```sh
 npm install
 ```
 
 Discord bot token is stored in a `.env` in `./` with the format:
+
 ```dotenv
 TOKEN="token"
 CLIENT_ID="client id"
