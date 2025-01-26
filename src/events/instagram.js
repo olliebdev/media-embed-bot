@@ -2,7 +2,7 @@ module.exports = (client) => {
     client.on("messageCreate", async (message) => {
         if (message.author.bot || !message.guild) return;
 
-        const instagramRegex = /https:\/\/(?:www\.)?instagram\.com\/([^\/\s]+(?:\/[^\/\s]*)?)/g;
+        const instagramRegex = /https:\/\/(?:www\.)?instagram\.com\/[\w]+(?:\/[\w]+)?/g;
 
         if (!instagramRegex.test(message.content) ||
             message.content.includes("ddinstagram.com") ||
@@ -24,7 +24,7 @@ module.exports = (client) => {
             await webhook.delete();
         } catch (error) {
             console.error('Error:', error);
-            message.reply('Sorry, something went wrong while processing the Instagram URL.').catch(() => {});
+            message.reply('Sorry, something went wrong while processing the Instagram URL.').catch(() => { });
         }
     });
 };
