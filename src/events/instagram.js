@@ -2,7 +2,7 @@ module.exports = (client) => {
     client.on("messageCreate", async (message) => {
         if (message.author.bot || !message.guild) return;
 
-        const instagramRegex = /https:\/\/(?:www\.)?instagram\.com\/(reel|p)\/[\w-]+(?:\/)?/g;
+        const instagramRegex = /https:\/\/(?:www\.)?instagram\.com\/(reel|p)\/[\w-]+\/?/g;
 
         if (!instagramRegex.test(message.content) ||
             message.content.includes("instagramez.com") ||
@@ -11,7 +11,7 @@ module.exports = (client) => {
 
         instagramRegex.lastIndex = 0;
         const editedContent = message.content.replace(instagramRegex, match =>
-            match.replace("instagram.com", "instagramez.com")
+            match.replace("instagram.com", "ddinstagram.com")
         );
 
         try {

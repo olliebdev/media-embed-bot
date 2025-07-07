@@ -2,7 +2,7 @@ module.exports = (client) => {
     client.on("messageCreate", async (message) => {
         if (message.author.bot || !message.guild) return;
 
-        const xRegex = /https:\/\/x\.com\/\w+\/status\/\d+(?:\/\w+\/\d+)?(?:\?[^\s]*)?/g;
+        const xRegex = /https:\/\/x\.com\/\w+\/status\/\d+(?:\/\w+\/\d+)?(?:\?\S*)?/g;
 
         if (!xRegex.test(message.content)) return;
 
