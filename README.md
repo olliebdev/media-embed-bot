@@ -10,7 +10,6 @@ Automatically embeds into Discord chat:
 
 - X
 - Reddit
-- Instagram
 
 >requires webhook permissions
 >as it creates a webhook to "fake" looking like the user posted it.
@@ -32,4 +31,4 @@ CLIENT_ID="client id"
 
 ## License
 
-[MIT](https://github.com/Ollie2304/media-embed-bot/blob/main/LICENSE)
+[MIT](https://github.com/olliebdev/media-embed-bot/blob/main/LICENSE)

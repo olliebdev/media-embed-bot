@@ -3,7 +3,6 @@ const { Events, ActivityType } = require("discord.js");
 const handlers = {
     x: require("./x.js"),
     reddit: require("./reddit.js"),
-    instagram: require("./instagram.js")
 };
 
 module.exports = {
